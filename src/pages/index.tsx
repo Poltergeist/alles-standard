@@ -5,7 +5,11 @@ import {
   Text,
   UnorderedList,
   ListItem,
+  Link,
+  Flex
 } from '@chakra-ui/react';
+
+import { FaDiscord } from 'react-icons/fa';
 
 export default function Home() {
   return (
@@ -37,6 +41,14 @@ export default function Home() {
             Championship im Atlantis.
           </ListItem>
         </UnorderedList>
+      </Box>
+      <Box as="footer" py={4} bg="gray.800" color="white">
+        <Flex justify="center" align="center">
+          <Text mr={2}>Join our community on Discord:</Text>
+          <Link href="https://discord.gg/My9pDdnsGC" isExternal>
+            <FaDiscord size="24px" />
+          </Link>
+        </Flex>
       </Box>
     </ChakraProvider>
   );
