@@ -1,47 +1,48 @@
 {
   "extends": [
-    "config:base"
+    "config:recommended"
   ],
   "semanticCommits": "enabled",
-  "stabilityDays": 3,
+  "minimumReleaseAge": "3 days",
   "prCreation": "not-pending",
   "labels": [
     "type: dependencies"
   ],
   "packageRules": [
     {
-      "packageNames": [
+      "matchPackageNames": [
         "node"
       ],
       "enabled": false
     },
     {
-      "matchPackagePatterns": [
-        "*"
-      ],
       "matchManagers": [
         "npm"
       ],
       "groupName": "all npm dependencies",
       "schedule": [
         "at any time"
+      ],
+      "matchPackageNames": [
+        "*"
       ]
     },
     {
-      "matchPackagePatterns": [
-        "*"
-      ],
       "matchManagers": [
         "github-actions"
       ],
       "groupName": "all GitHub Actions",
       "schedule": [
         "at any time"
+      ],
+      "matchPackageNames": [
+        "*"
       ]
     }
   ],
   "timezone": "Etc/UTC",
   "schedule": [
-    "after 10pm and before 5am on every weekday"
+    "after 10pm every weekday",
+    "before 5am every weekday"
   ]
 }
