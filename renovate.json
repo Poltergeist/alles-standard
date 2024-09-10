@@ -2,6 +2,7 @@
   "extends": [
     "config:recommended"
   ],
+  "dependencyDashboard": true,
   "semanticCommits": "enabled",
   "minimumReleaseAge": "3 days",
   "prCreation": "not-pending",
