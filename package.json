@@ -2,6 +2,7 @@
   "name": "alles-standard",
   "description": "A TypeScript starter for Gatsby that includes all you need to build amazing projects",
   "version": "1.0.0",
+  "type": "module",
   "private": true,
   "author": "João Pedro Schmitz <hey@joaopedro.dev> (https://joaopedro.dev)",
   "license": "MIT",
@@ -16,7 +17,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "type-check": "tsc --noEmit",
-    "lint": "eslint --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\"",
+    "lint": "eslint",
     "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\" --write",
     "postinstall": "husky install",
     "test": "vitest",
@@ -27,12 +28,16 @@
   },
   "lint-staged": {
     "./src/**/*.{ts,js,jsx,tsx}": [
-      "eslint --ignore-path .gitignore --fix",
+      "eslint .gitignore --fix",
       "prettier --ignore-path .gitignore --write"
     ]
   },
   "dependencies": {
+    "@eslint/compat": "1.1.1",
+    "@eslint/eslintrc": "3.1.0",
+    "@eslint/js": "9.10.0",
     "gatsby": "5.13.7",
+    "globals": "15.9.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tsconfig-paths-webpack-plugin": "4.0.1"
