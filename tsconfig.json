@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "lib": ["dom", "esnext"],
+    "lib": [
+      "dom",
+      "esnext"
+    ],
     "jsx": "react-jsx",
     "module": "esnext",
     "moduleResolution": "node",
@@ -11,11 +14,26 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@/static/*": ["./static/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@/static/*": [
+        "./static/*"
+      ]
     },
-    "types": ["node", "@testing-library/jest-dom"]
+    "types": [
+      "node",
+      "@testing-library/jest-dom"
+    ]
   },
-  "exclude": ["node_modules"],
-  "include": ["./src/**/*"]
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "src",
+    "gatsby-config.ts",
+    "gatsby-node.ts",
+    "gatsby-browser.ts",
+    "gatsby-ssr.ts"
+  ]
 }
