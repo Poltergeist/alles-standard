@@ -20,6 +20,18 @@
       "matchManagers": [
         "npm"
       ],
+      "groupName": "eslint",
+      "schedule": [
+        "at any time"
+      ],
+      "matchPackageNames": [
+        "eslint**"
+      ]
+    },
+    {
+      "matchManagers": [
+        "npm"
+      ],
       "groupName": null,
       "schedule": [
         "at any time"
