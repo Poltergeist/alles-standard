@@ -157,8 +157,8 @@ importers:
         specifier: 5.6.3
         version: 5.6.3
       vite-tsconfig-paths:
-        specifier: 4.3.2
-        version: 4.3.2(typescript@5.6.3)(vite@4.5.5(@types/node@20.16.11)(terser@5.36.0))
+        specifier: 5.0.1
+        version: 5.0.1(typescript@5.6.3)(vite@4.5.5(@types/node@20.16.11)(terser@5.36.0))
       vitest:
         specifier: 0.34.6
         version: 0.34.6(jsdom@25.0.1)(terser@5.36.0)
@@ -6872,8 +6872,8 @@ packages:
     engines: {node: '>=v14.18.0'}
     hasBin: true
 
-  vite-tsconfig-paths@4.3.2:
-    resolution: {integrity: sha512-0Vd/a6po6Q+86rPlntHye7F31zA2URZMbH8M3saAZ/xR9QoGN/L21bxEGfXdWmFdNkqPpRdxFT7nmNe12e9/uA==}
+  vite-tsconfig-paths@5.0.1:
+    resolution: {integrity: sha512-yqwv+LstU7NwPeNqajZzLEBVpUFU6Dugtb2P84FXuvaoYA+/70l9MHE+GYfYAycVyPSDYZ7mjOFuYBRqlEpTig==}
     peerDependencies:
       vite: '*'
     peerDependenciesMeta:
@@ -15299,7 +15299,7 @@ snapshots:
       - supports-color
       - terser
 
-  vite-tsconfig-paths@4.3.2(typescript@5.6.3)(vite@4.5.5(@types/node@20.16.11)(terser@5.36.0)):
+  vite-tsconfig-paths@5.0.1(typescript@5.6.3)(vite@4.5.5(@types/node@20.16.11)(terser@5.36.0)):
     dependencies:
       debug: 4.3.7
       globrex: 0.1.2
