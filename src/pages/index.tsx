@@ -42,7 +42,7 @@ export default function Home() {
         </Heading>
         <UnorderedList>
           <ListItem>
-            <Text textDecoration="line-through">
+            <Text>
               Turnier: <time dateTime="2024-10-18">18 Oktober</time> Store
               Championship in Elmshorn.
             </Text>
