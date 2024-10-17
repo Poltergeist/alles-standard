@@ -1,21 +1,26 @@
 import {
-  ChakraProvider,
   Box,
+  ChakraProvider,
+  Divider,
+  Flex,
   Heading,
+  Link,
+  ListItem,
   Text,
   UnorderedList,
-  ListItem,
-  Link,
-  Flex
 } from '@chakra-ui/react';
+import Title from '../components/Title';
 
 import { FaDiscord } from 'react-icons/fa';
 
 export default function Home() {
   return (
     <ChakraProvider>
+      <Title>Alles Standard</Title>
+      <Box padding={10}>
+        <Divider />
+      </Box>
       <Box as="main" p={4}>
-        <Heading as="h1">Alles Standard</Heading>
         <Text mb={4}>
           Wir wollen wieder mehr Standard spielen in Hamburg, deswegen werden
           wir in Zukunft Turniere organisieren in Zusammenarbeit mit Läden oder
@@ -37,8 +42,16 @@ export default function Home() {
         </Heading>
         <UnorderedList>
           <ListItem>
-            1. Turnier: <time dateTime="2024-08-24">24 August</time> Store
-            Championship im Atlantis.
+            <Text>
+              Turnier: <time dateTime="2024-10-18">18 Oktober</time> Store
+              Championship in Elmshorn.
+            </Text>
+          </ListItem>
+          <ListItem>
+            <Text textDecoration="line-through">
+              1. Turnier: <time dateTime="2024-08-24">24 August</time> Store
+              Championship im Atlantis.
+            </Text>
           </ListItem>
         </UnorderedList>
       </Box>
