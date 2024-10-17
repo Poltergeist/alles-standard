@@ -5,7 +5,7 @@
   "dependencyDashboard": true,
   "semanticCommits": "enabled",
   "minimumReleaseAge": "3 days",
-  "prCreation": "immediate",
+  "prCreation": "not-pending",
   "labels": [
     "type: dependencies"
   ],
