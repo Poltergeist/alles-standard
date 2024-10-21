@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import {
   Box,
   ChakraProvider,
@@ -10,7 +11,7 @@ import {
   UnorderedList,
 } from '@chakra-ui/react';
 import Title from '../components/Title';
-
+import DiscordEventLink from '../components/DiscordEventLink';
 import { FaDiscord } from 'react-icons/fa';
 
 export default function Home() {
@@ -43,6 +44,16 @@ export default function Home() {
         <UnorderedList>
           <ListItem>
             <Text>
+              <time dateTime="2024-10-23">23 Oktober</time> Staandard @ Xperion
+              Hamburg
+            </Text>
+            <DiscordEventLink
+              url="https://discord.gg/fj2fqrXf?event=1297836834667233280"
+              linkText="Auf Discord teilnehmen"
+            />
+          </ListItem>
+          <ListItem>
+            <Text textDecoration="line-through">
               Turnier: <time dateTime="2024-10-18">18 Oktober</time> Store
               Championship in Elmshorn.
             </Text>
@@ -57,7 +68,7 @@ export default function Home() {
       </Box>
       <Box as="footer" py={4} bg="gray.800" color="white">
         <Flex justify="center" align="center">
-          <Text mr={2}>Join our community on Discord:</Text>
+          <Text mr={2}>Kommt in unsere Discord Community:</Text>
           <Link href="https://discord.gg/My9pDdnsGC" isExternal>
             <FaDiscord size="24px" />
           </Link>
