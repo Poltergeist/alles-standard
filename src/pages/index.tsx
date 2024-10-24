@@ -44,13 +44,20 @@ export default function Home() {
         <UnorderedList>
           <ListItem>
             <Text>
-              <time dateTime="2024-10-23">23 Oktober</time> Staandard @ Xperion
+              <time dateTime="2024-10-30">30 Oktober</time> Standard @ Dice &
+              Decks
+              <DiscordEventLink
+                url="https://discord.gg/fj2fqrXf?event=1299008749293535263"
+                linkText="Auf Discord teilnehmen"
+              />
               Hamburg
             </Text>
-            <DiscordEventLink
-              url="https://discord.gg/fj2fqrXf?event=1297836834667233280"
-              linkText="Auf Discord teilnehmen"
-            />
+          </ListItem>
+          <ListItem>
+            <Text textDecoration="line-through">
+              <time dateTime="2024-10-23">23 Oktober</time> Standard @ Xperion
+              Hamburg
+            </Text>
           </ListItem>
           <ListItem>
             <Text textDecoration="line-through">
