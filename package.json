@@ -38,7 +38,7 @@
     "@types/testing-library__jest-dom": "6.0.0",
     "eslint": "9.12.0",
     "gatsby": "5.13.7",
-    "gatsby-plugin-image": "3.13.1",
+    "gatsby-plugin-image": "3.14.0",
     "gatsby-plugin-pnpm": "1.2.10",
     "gatsby-plugin-sharp": "5.13.1",
     "gatsby-source-filesystem": "5.13.1",
