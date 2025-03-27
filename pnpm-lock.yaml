@@ -109,8 +109,8 @@ importers:
         specifier: 4.3.2
         version: 4.3.2(vite@5.4.9(@types/node@20.16.12)(terser@5.36.0))
       babel-preset-gatsby:
-        specifier: 3.13.2
-        version: 3.13.2(@babel/core@7.25.8)(core-js@3.38.1)
+        specifier: 3.14.0
+        version: 3.14.0(@babel/core@7.25.8)(core-js@3.38.1)
       c8:
         specifier: 10.1.2
         version: 10.1.2
@@ -2576,8 +2576,8 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0
 
-  babel-preset-gatsby@3.13.2:
-    resolution: {integrity: sha512-1zZ3Fpt9jD63inJXWUF2hA6U2cBAMYFDSC5hKqnSSVbNUzKlHUcY0Vbx8azBSaHg27TVp9BitR10zvq5AHP/OQ==}
+  babel-preset-gatsby@3.14.0:
+    resolution: {integrity: sha512-yE/1gmohqy+Y/v8RYWMyJ1WLrACSkblS8LRcByeNqqBPrDAaG5T/bU1Lhc75BW8j9iLDOkLilun3fGZRu5nacA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       '@babel/core': ^7.11.6
@@ -3994,12 +3994,19 @@ packages:
     resolution: {integrity: sha512-w7G6SsQr8T2q+AJ1MxvRNGocCt+wjc22MiRLj2Zi3Ijpjszbr818JxwI4+aPt8WOSHlKT5SYCHICnEvcYPm9gg==}
     engines: {node: '>=18.0.0'}
 
+  gatsby-core-utils@4.14.0:
+    resolution: {integrity: sha512-h0v20gB213PmhKjioCJ93SrUb7Hihnqxd6X6Iur4u1eiWTUDsGeV9g1bkquiuDl2qovUnjj7mOoHdWiu/Ax/9Q==}
+    engines: {node: '>=18.0.0'}
+
   gatsby-graphiql-explorer@3.13.1:
     resolution: {integrity: sha512-WR6jv18OhKLwK/hGZ6ZGUd82GFtM6gHz+sOpgsJJx/+uqRjZwqcrH2LSrWRSWUCk7FoZY1rJuBSD1QkOODV01A==}
     engines: {node: '>=14.15.0'}
 
   gatsby-legacy-polyfills@3.13.1:
     resolution: {integrity: sha512-NjR3B/rq6dsJuaMmeHlGExdVXJfDqVWERXi9ROfIBt7O3Fwzy5WYgoPeVikVZE06DmeZWlBzuNcGSfc8lilB5g==}
+
+  gatsby-legacy-polyfills@3.14.0:
+    resolution: {integrity: sha512-CsNguwA88GgLgENx6WEuT8DDl+dus8FdedU1h43Xh9XtD8g/EjJGZk/N458+aZ32ulhuacJEexe3d9ASuEQxMQ==}
 
   gatsby-link@5.13.1:
     resolution: {integrity: sha512-naQxvgX/rd4Pj5ICL2DcqT30TAENk6wHttcLioxIqW9/UhwAXGkM9QsOJOyUmwbrp37UIKU3K92Ks/cMbRxwXA==}
@@ -4933,6 +4940,7 @@ packages:
 
   lodash.get@4.4.2:
     resolution: {integrity: sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==}
+    deprecated: This package is deprecated. Use the optional chaining (?.) operator instead.
 
   lodash.isplainobject@4.0.6:
     resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
@@ -6555,6 +6563,7 @@ packages:
 
   sudo-prompt@8.2.5:
     resolution: {integrity: sha512-rlBo3HU/1zAJUrkY6jNxDOC9eVYliG6nS4JA8u8KAshITd07tafMc/Br7xQwCSseXwJ2iCcHCE8SNWX3q8Z+kw==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   supports-color@5.5.0:
     resolution: {integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==}
@@ -7277,6 +7286,7 @@ packages:
   yurnalist@2.1.0:
     resolution: {integrity: sha512-PgrBqosQLM3gN2xBFIMDLACRTV9c365VqityKKpSTWpwR+U4LAFR3rSVyEoscWlu3EzX9+Y0I86GXUKxpHFl6w==}
     engines: {node: '>=4.0.0'}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
 snapshots:
 
@@ -10159,7 +10169,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  babel-preset-gatsby@3.13.2(@babel/core@7.25.8)(core-js@3.38.1):
+  babel-preset-gatsby@3.14.0(@babel/core@7.25.8)(core-js@3.38.1):
     dependencies:
       '@babel/core': 7.25.8
       '@babel/plugin-proposal-class-properties': 7.18.6(@babel/core@7.25.8)
@@ -10176,8 +10186,8 @@ snapshots:
       babel-plugin-macros: 3.1.0
       babel-plugin-transform-react-remove-prop-types: 0.4.24
       core-js: 3.38.1
-      gatsby-core-utils: 4.13.1
-      gatsby-legacy-polyfills: 3.13.1
+      gatsby-core-utils: 4.14.0
+      gatsby-legacy-polyfills: 3.14.0
     transitivePeerDependencies:
       - supports-color
 
@@ -11354,7 +11364,7 @@ snapshots:
       debug: 4.3.7
       enhanced-resolve: 5.17.1
       eslint: 9.12.0(jiti@1.21.6)
-      eslint-module-utils: 2.12.0(@typescript-eslint/parser@8.9.0(eslint@9.12.0(jiti@1.21.6))(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3)(eslint@9.12.0(jiti@1.21.6))
+      eslint-module-utils: 2.12.0(@typescript-eslint/parser@8.9.0(eslint@9.12.0(jiti@1.21.6))(typescript@5.6.3))(eslint-import-resolver-typescript@3.6.3)(eslint@9.12.0(jiti@1.21.6))
       fast-glob: 3.3.2
       get-tsconfig: 4.8.1
       is-bun-module: 1.2.1
@@ -11385,6 +11395,16 @@ snapshots:
       '@typescript-eslint/parser': 8.9.0(eslint@9.12.0(jiti@1.21.6))(typescript@5.6.3)
       eslint: 9.12.0(jiti@1.21.6)
       eslint-import-resolver-node: 0.3.9
+      eslint-import-resolver-typescript: 3.6.3(@typescript-eslint/parser@8.9.0(eslint@9.12.0(jiti@1.21.6))(typescript@5.6.3))(eslint-plugin-import@2.31.0)(eslint@9.12.0(jiti@1.21.6))
+    transitivePeerDependencies:
+      - supports-color
+
+  eslint-module-utils@2.12.0(@typescript-eslint/parser@8.9.0(eslint@9.12.0(jiti@1.21.6))(typescript@5.6.3))(eslint-import-resolver-typescript@3.6.3)(eslint@9.12.0(jiti@1.21.6)):
+    dependencies:
+      debug: 3.2.7
+    optionalDependencies:
+      '@typescript-eslint/parser': 8.9.0(eslint@9.12.0(jiti@1.21.6))(typescript@5.6.3)
+      eslint: 9.12.0(jiti@1.21.6)
       eslint-import-resolver-typescript: 3.6.3(@typescript-eslint/parser@8.9.0(eslint@9.12.0(jiti@1.21.6))(typescript@5.6.3))(eslint-plugin-import@2.31.0)(eslint@9.12.0(jiti@1.21.6))
     transitivePeerDependencies:
       - supports-color
@@ -12134,9 +12154,33 @@ snapshots:
       tmp: 0.2.3
       xdg-basedir: 4.0.0
 
+  gatsby-core-utils@4.14.0:
+    dependencies:
+      '@babel/runtime': 7.25.7
+      ci-info: 2.0.0
+      configstore: 5.0.1
+      fastq: 1.17.1
+      file-type: 16.5.4
+      fs-extra: 11.2.0
+      got: 11.8.6
+      hash-wasm: 4.11.0
+      import-from: 4.0.0
+      lmdb: 2.5.3
+      lock: 1.1.0
+      node-object-hash: 2.3.10
+      proper-lockfile: 4.1.2
+      resolve-from: 5.0.0
+      tmp: 0.2.3
+      xdg-basedir: 4.0.0
+
   gatsby-graphiql-explorer@3.13.1: {}
 
   gatsby-legacy-polyfills@3.13.1:
+    dependencies:
+      '@babel/runtime': 7.25.7
+      core-js-compat: 3.31.0
+
+  gatsby-legacy-polyfills@3.14.0:
     dependencies:
       '@babel/runtime': 7.25.7
       core-js-compat: 3.31.0
@@ -12390,7 +12434,7 @@ snapshots:
       babel-plugin-add-module-exports: 1.0.4
       babel-plugin-dynamic-import-node: 2.3.3
       babel-plugin-remove-graphql-queries: 5.13.1(@babel/core@7.25.8)(gatsby@5.13.7(babel-eslint@10.1.0(eslint@9.12.0(jiti@1.21.6)))(eslint-import-resolver-typescript@3.6.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@0.21.3)(typescript@5.6.3))
-      babel-preset-gatsby: 3.13.2(@babel/core@7.25.8)(core-js@3.38.1)
+      babel-preset-gatsby: 3.14.0(@babel/core@7.25.8)(core-js@3.38.1)
       better-opn: 2.1.1
       bluebird: 3.7.2
       body-parser: 1.20.1
