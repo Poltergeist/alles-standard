@@ -1,0 +1,36 @@
+name: Deploy Hugo site to GitHub Pages
+
+on:
+  push:
+    branches: [main] # or 'master', depending on your default branch
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.124.1' # or whatever you're using
+          extended: true
+
+      - name: Install Hugo modules
+        run: hugo mod tidy
+
+      - name: Build site
+        run: hugo --minify
+
+      - name: create CNAME file
+        run: echo "www.alles-standard.social" >> ./public/CNAME
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public

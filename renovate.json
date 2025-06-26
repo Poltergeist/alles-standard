@@ -1,62 +1,18 @@
 {
-  "extends": [
-    "config:recommended"
-  ],
+  "extends": ["config:recommended"],
   "dependencyDashboard": true,
   "semanticCommits": "enabled",
   "minimumReleaseAge": "3 days",
   "prCreation": "not-pending",
-  "labels": [
-    "type: dependencies"
-  ],
+  "labels": ["type: dependencies"],
   "packageRules": [
     {
-      "matchPackageNames": [
-        "node"
-      ],
-      "enabled": false
-    },
-    {
-      "matchManagers": [
-        "npm"
-      ],
-      "groupName": "eslint",
-      "schedule": [
-        "at any time"
-      ],
-      "matchPackageNames": [
-        "eslint**"
-      ]
-    },
-    {
-      "matchManagers": [
-        "npm"
-      ],
-      "groupName": null,
-      "schedule": [
-        "at any time"
-      ],
-      "automerge": true,
-      "matchPackageNames": [
-        "*"
-      ]
-    },
-    {
-      "matchManagers": [
-        "github-actions"
-      ],
+      "matchManagers": ["github-actions"],
       "groupName": "all GitHub Actions",
-      "schedule": [
-        "at any time"
-      ],
-      "matchPackageNames": [
-        "*"
-      ]
+      "schedule": ["at any time"],
+      "matchPackageNames": ["*"]
     }
   ],
   "timezone": "Etc/UTC",
-  "schedule": [
-    "after 10pm every weekday",
-    "before 5am every weekday"
-  ]
+  "schedule": ["after 10pm every weekday", "before 5am every weekday"]
 }

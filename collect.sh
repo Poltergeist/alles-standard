@@ -1,0 +1,10 @@
+#!/bin/bash
+curl 'https://api.tabletop.wizards.com/silverbeak-griffin-service/graphql' \
+  -H 'accept: */*' \
+  -H 'accept-language: en-US,en;q=0.9' \
+  -H 'content-type: application/json' \
+  -H 'origin: https://locator.wizards.com' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://locator.wizards.com/' \
+  -H 'x-wotc-client: client:locator version:local_version platform:OS X/Chrome/138.0.0.0' \
+  --data-raw $'{"operationName":"queryEvents","variables":{"latitude":53.5488282,"longitude":9.987170299999999,"maxMeters":100000,"tags":["magic:_the_gathering","standard"],"sort":"date","sortDirection":"Asc","orgs":[],"pageSize":200,"page":0},"query":"query queryEvents($latitude: Float\u0021, $longitude: Float\u0021, $maxMeters: Int\u0021, $tags: [String\u0021]\u0021, $sort: EventSearchSortField, $sortDirection: EventSearchSortDirection, $orgs: [ID\u0021], $startDate: DateTime, $endDate: DateTime, $page: Int, $pageSize: Int) {\\n  searchEvents(\\n    query: {latitude: $latitude, longitude: $longitude, maxMeters: $maxMeters, tags: $tags, sort: $sort, sortDirection: $sortDirection, orgs: $orgs, startDate: $startDate, endDate: $endDate, page: $page, pageSize: $pageSize}\\n  ) {\\n    events {\\n      id\\n      capacity\\n      description\\n      distance\\n      emailAddress\\n      hasTop8\\n      isAdHoc\\n      isOnline\\n      latitude\\n      longitude\\n      title\\n      eventTemplateId\\n      pairingType\\n      phoneNumber\\n      requiredTeamSize\\n      rulesEnforcementLevel\\n      scheduledStartTime\\n      startingTableNumber\\n      status\\n      tags\\n      timeZone\\n      cardSet {\\n        id\\n        __typename\\n      }\\n      entryFee {\\n        amount\\n        currency\\n        __typename\\n      }\\n      organization {\\n        id\\n        isPremium\\n        name\\n        postalAddress\\n        website\\n        __typename\\n      }\\n      eventFormat {\\n        id\\n        __typename\\n      }\\n      __typename\\n    }\\n    pageInfo {\\n      page\\n      pageSize\\n      totalResults\\n      __typename\\n    }\\n    __typename\\n  }\\n}"}' >data/events.json
