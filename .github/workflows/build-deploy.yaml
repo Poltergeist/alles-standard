@@ -13,11 +13,14 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          submodules: recursive # 💡 This fetches the theme submodule
+          fetch-depth: 0 # Needed for full history (especially with themes)
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: '0.124.1' # or whatever you're using
+          hugo-version: '0.147.9' # or whatever you're using
           extended: true
 
       - name: Install Hugo modules
