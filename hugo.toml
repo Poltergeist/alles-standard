@@ -1,3 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://alles-standard.social/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = 'Alles Standard'
+theme = 'ananke'
