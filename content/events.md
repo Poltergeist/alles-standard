@@ -1,9 +1,10 @@
 +++
-date = '2025-06-26T14:31:14+02:00'
 draft = false
 title = 'Events'
-menus = 'main'
+type = 'events'
+[build]
+  list = 'never'
 +++
 
-TEST
-{{.Title}}
+These are the next Events which are coming up for Standard
+in the next couple of weeks. and within 100km from Hamburg.
