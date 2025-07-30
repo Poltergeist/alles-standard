@@ -11,8 +11,10 @@
     <p>{{.organization.name}}</p>
     <p>{{.organization.postalAddress}}</p>
     <p><a href="{{.organization.website}}">Website</a></p>
-    {{$t:= time.AsTime .scheduledStartTime}}
-    <p>Date: {{time.Format "2 Jan 2006" $t}}</p>
+    {{$t:= time.AsTime .scheduledStartTime "Etc/UTC"}}
+    <p>
+      Date: {{$t | time.In "Europe/Berlin" | time.Format "2 Jan 2006 15:04"}}
+    </p>
     <p>Capacity: {{.capacity}} People</p>
     <p>{{.description}}</p>
     <p>Rules Enforcement Level: {{.rulesEnforcementLevel}}</p>

@@ -7,4 +7,4 @@ type = 'events'
 +++
 
 These are the next Events which are coming up for Standard
-in the next couple of weeks. and within 100km from Hamburg.
+in the next couple of weeks and within 100km from Hamburg.
