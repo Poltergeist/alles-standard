@@ -11,9 +11,11 @@
 # testing
 /coverage
 
-# gatsby
+# hugo
 .cache/
 public/
+resources/_gen/
+.hugo_build.lock
 
 # production
 /build
@@ -21,6 +23,7 @@ public/
 # misc
 .DS_Store
 *.pem
+*.deb
 tsconfig.tsbuildinfo
 
 # debug
@@ -30,7 +33,7 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # local env files
-.env\*
+.env*
 
 # vercel
 .vercel
