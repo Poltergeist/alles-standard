@@ -13,7 +13,6 @@
 
 # hugo (legacy - can be removed after migration complete)
 .cache/
-public/
 resources/_gen/
 .hugo_build.lock
 
