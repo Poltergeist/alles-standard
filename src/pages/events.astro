@@ -1,0 +1,85 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import EventCard from '@components/EventCard.astro';
+import type { EventData } from '@/types/events';
+
+// Load events data from JSON file
+let eventsData: EventData | null = null;
+let errorMessage: string | null = null;
+
+try {
+  const data = await import('../../data/events.json');
+  eventsData = data.default as EventData;
+} catch (error) {
+  console.error('Failed to load events data:', error);
+  errorMessage = 'Failed to load events data. Please try again later.';
+}
+
+const events = eventsData?.data?.searchEvents?.events || [];
+const totalResults = eventsData?.data?.searchEvents?.pageInfo?.totalResults || 0;
+---
+
+<BaseLayout 
+  title="Standard Events - Alles Standard" 
+  description="Browse upcoming Magic: The Gathering Standard format events within 100km of Hamburg, Germany"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Page Header -->
+    <div class="mb-8">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">
+        Standard Events
+      </h1>
+      <p class="text-xl text-gray-300">
+        These are the next events coming up for Standard format within 100km from Hamburg
+      </p>
+      {totalResults > 0 && (
+        <p class="text-mtg-gold font-semibold mt-2">
+          {totalResults} event{totalResults !== 1 ? 's' : ''} found
+        </p>
+      )}
+    </div>
+
+    <!-- Error Message -->
+    {errorMessage && (
+      <div class="bg-red-900/30 border border-red-700 rounded-lg p-6 mb-8">
+        <div class="flex items-start">
+          <svg class="w-6 h-6 text-red-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <div>
+            <h3 class="text-lg font-semibold text-white mb-1">Error Loading Events</h3>
+            <p class="text-gray-300">{errorMessage}</p>
+          </div>
+        </div>
+      </div>
+    )}
+
+    <!-- Events List -->
+    {events.length > 0 ? (
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-1">
+        {events.map((event) => (
+          <EventCard event={event} />
+        ))}
+      </div>
+    ) : !errorMessage && (
+      <div class="text-center py-16">
+        <svg class="w-16 h-16 text-gray-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+        </svg>
+        <h2 class="text-2xl font-bold text-white mb-2">No Events Found</h2>
+        <p class="text-gray-400">Check back later for upcoming Standard events.</p>
+      </div>
+    )}
+
+    <!-- Info Box -->
+    <div class="mt-12 bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg p-6 border border-gray-700">
+      <h3 class="text-lg font-bold text-white mb-2">About These Events</h3>
+      <p class="text-gray-300 mb-2">
+        Event data is automatically fetched from the official Wizards of the Coast event locator and updated daily.
+      </p>
+      <p class="text-gray-300">
+        Events are shown within a 100km radius of Hamburg and are filtered for Standard format tournaments only.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,76 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+  title="Alles Standard - MTG Standard Events in Hamburg"
+  description="Your central hub for Magic: The Gathering Standard format events in Hamburg and surrounding areas. Find tournaments, connect with players, and stay updated."
+  image="/images/logo.jpg"
+>
+  <div class="relative">
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-br from-mtg-red via-red-800 to-gray-900 py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <!-- Logo -->
+        <div class="mb-6 flex justify-center">
+          <img src="/images/logo.jpg" alt="Alles Standard" class="h-32 md:h-40 w-auto object-contain" />
+        </div>
+        <p class="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto">
+          Your central hub for Magic: The Gathering Standard format events in Hamburg and surrounding areas
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/events/" class="btn-primary text-lg py-3 px-8">
+            View Events
+          </a>
+          <a href="/discord/" class="btn-secondary text-lg py-3 px-8">
+            Join Discord
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="card p-6">
+          <div class="text-mtg-gold text-3xl mb-4">📅</div>
+          <h3 class="text-xl font-bold text-white mb-3">Upcoming Events</h3>
+          <p class="text-gray-300">
+            Stay up-to-date with all Standard format tournaments happening within 100km of Hamburg
+          </p>
+        </div>
+
+        <div class="card p-6">
+          <div class="text-mtg-gold text-3xl mb-4">🎯</div>
+          <h3 class="text-xl font-bold text-white mb-3">Tournament Details</h3>
+          <p class="text-gray-300">
+            Get all the info you need: location, timing, entry fees, and rules enforcement levels
+          </p>
+        </div>
+
+        <div class="card p-6">
+          <div class="text-mtg-gold text-3xl mb-4">💬</div>
+          <h3 class="text-xl font-bold text-white mb-3">Community</h3>
+          <p class="text-gray-300">
+            Connect with fellow Standard players in our Discord community
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="bg-gradient-to-r from-gray-800 to-gray-900 py-12">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">
+          Ready to play?
+        </h2>
+        <p class="text-xl text-gray-300 mb-8">
+          Check out the latest Standard events and find your next tournament
+        </p>
+        <a href="/events/" class="btn-primary text-lg py-3 px-8 inline-block">
+          Browse Events →
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
