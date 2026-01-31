@@ -11,11 +11,15 @@
 # testing
 /coverage
 
-# hugo
+# hugo (legacy - can be removed after migration complete)
 .cache/
 public/
 resources/_gen/
 .hugo_build.lock
+
+# astro
+dist/
+.astro/
 
 # production
 /build
