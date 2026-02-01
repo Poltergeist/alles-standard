@@ -4,32 +4,43 @@ export default {
   theme: {
     extend: {
       colors: {
-        // MTGGoldfish-inspired color palette
+        // Vibrant color palette from the new logo
+        'brand': {
+          orange: '#BD4C39',  // Coral orange from logo
+          gold: '#E6B338',    // Golden yellow
+          teal: '#40BECA',    // Bright teal/cyan
+          magenta: '#D04EAB', // Vibrant magenta
+          green: '#578770',   // Muted green
+          brown: '#582018',   // Dark warm brown
+          cream: '#DABAAC',   // Light cream
+          dark: '#514E41',    // Warm dark gray
+        },
+        // Legacy MTGGoldfish colors (kept for compatibility)
         'mtg-red': {
-          DEFAULT: '#DC2626',
-          50: '#FECACA',
-          100: '#FCA5A5',
-          200: '#F87171',
-          300: '#EF4444',
-          400: '#DC2626',
-          500: '#B91C1C',
-          600: '#991B1B',
-          700: '#7F1D1D',
-          800: '#651F1F',
-          900: '#4C1D1D',
+          DEFAULT: '#BD4C39', // Updated to logo orange
+          50: '#FEE6E2',
+          100: '#FCCEC6',
+          200: '#F89D8D',
+          300: '#F46C54',
+          400: '#BD4C39',
+          500: '#A33D2C',
+          600: '#892F1F',
+          700: '#6F2114',
+          800: '#582018',
+          900: '#3D160F',
         },
         'mtg-gold': {
-          DEFAULT: '#FCD34D',
-          50: '#FFFBEB',
-          100: '#FEF3C7',
-          200: '#FDE68A',
-          300: '#FCD34D',
-          400: '#FBBF24',
-          500: '#F59E0B',
-          600: '#D97706',
-          700: '#B45309',
-          800: '#92400E',
-          900: '#78350F',
+          DEFAULT: '#E6B338', // Updated to logo gold
+          50: '#FEF8E8',
+          100: '#FDF0D1',
+          200: '#FAE1A3',
+          300: '#F8D275',
+          400: '#E6B338',
+          500: '#D49B1A',
+          600: '#B38215',
+          700: '#8F6811',
+          800: '#6B4E0D',
+          900: '#473408',
         },
       },
       fontFamily: {
