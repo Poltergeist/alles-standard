@@ -1,21 +1,17 @@
 {
-  "name": "alles-standard",
-  "type": "module",
+  "name": "alles-standard-monorepo",
   "version": "1.0.0",
+  "private": true,
+  "packageManager": "npm@11.5.2",
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "astro": "^5.17.1"
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "preview": "turbo run preview"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/tailwind": "^5.1.2",
-    "tailwindcss": "^3.4.17",
-    "typescript": "^5.7.3"
+    "turbo": "^2.3.3"
   }
 }
