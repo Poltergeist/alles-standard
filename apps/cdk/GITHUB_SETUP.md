@@ -21,26 +21,218 @@ To enable automatic CDK deployments via GitHub Actions, you need to configure th
 4. Audience: `sts.amazonaws.com`
 5. Click **Next**
 
-6. Attach the following policies (or create a custom policy):
-   - `AWSBillingConductorFullAccess` (for billing group management)
-   - Alternatively, create a custom policy with these permissions:
+6. Attach the following policies for general CDK deployments:
+   
+   **Option A: Use AWS Managed Policies (Simpler, broader permissions)**
+   - `PowerUserAccess` (recommended for development/staging)
+   - Or create a custom policy with specific permissions (see Option B)
+
+   **Option B: Custom Policy (More secure, production-recommended)**
+   
+   Create a custom policy with these permissions for Lambda, Step Functions, and general CDK:
    ```json
    {
      "Version": "2012-10-17",
      "Statement": [
        {
+         "Sid": "CloudFormationFull",
          "Effect": "Allow",
          "Action": [
-           "billingconductor:*",
-           "cloudformation:*",
-           "s3:*",
-           "iam:PassRole"
+           "cloudformation:*"
+         ],
+         "Resource": "*"
+       },
+       {
+         "Sid": "S3CDKAssets",
+         "Effect": "Allow",
+         "Action": [
+           "s3:*"
+         ],
+         "Resource": [
+           "arn:aws:s3:::cdk-*",
+           "arn:aws:s3:::cdk-*/*"
+         ]
+       },
+       {
+         "Sid": "LambdaFull",
+         "Effect": "Allow",
+         "Action": [
+           "lambda:*"
+         ],
+         "Resource": "*"
+       },
+       {
+         "Sid": "StepFunctionsFull",
+         "Effect": "Allow",
+         "Action": [
+           "states:*"
+         ],
+         "Resource": "*"
+       },
+       {
+         "Sid": "IAMRoleManagement",
+         "Effect": "Allow",
+         "Action": [
+           "iam:CreateRole",
+           "iam:DeleteRole",
+           "iam:GetRole",
+           "iam:PassRole",
+           "iam:AttachRolePolicy",
+           "iam:DetachRolePolicy",
+           "iam:PutRolePolicy",
+           "iam:DeleteRolePolicy",
+           "iam:GetRolePolicy",
+           "iam:TagRole",
+           "iam:UntagRole",
+           "iam:UpdateAssumeRolePolicy",
+           "iam:UpdateRole",
+           "iam:CreatePolicy",
+           "iam:DeletePolicy",
+           "iam:GetPolicy",
+           "iam:GetPolicyVersion",
+           "iam:ListPolicyVersions",
+           "iam:CreatePolicyVersion",
+           "iam:DeletePolicyVersion",
+           "iam:TagPolicy",
+           "iam:UntagPolicy"
+         ],
+         "Resource": "*"
+       },
+       {
+         "Sid": "CloudWatchLogs",
+         "Effect": "Allow",
+         "Action": [
+           "logs:CreateLogGroup",
+           "logs:DeleteLogGroup",
+           "logs:DescribeLogGroups",
+           "logs:PutRetentionPolicy",
+           "logs:DeleteRetentionPolicy",
+           "logs:TagLogGroup",
+           "logs:UntagLogGroup"
+         ],
+         "Resource": "*"
+       },
+       {
+         "Sid": "EventBridge",
+         "Effect": "Allow",
+         "Action": [
+           "events:*"
+         ],
+         "Resource": "*"
+       },
+       {
+         "Sid": "DynamoDB",
+         "Effect": "Allow",
+         "Action": [
+           "dynamodb:CreateTable",
+           "dynamodb:UpdateTable",
+           "dynamodb:DeleteTable",
+           "dynamodb:DescribeTable",
+           "dynamodb:DescribeContinuousBackups",
+           "dynamodb:DescribeTimeToLive",
+           "dynamodb:UpdateTimeToLive",
+           "dynamodb:TagResource",
+           "dynamodb:UntagResource",
+           "dynamodb:ListTagsOfResource"
+         ],
+         "Resource": "*"
+       },
+       {
+         "Sid": "APIGateway",
+         "Effect": "Allow",
+         "Action": [
+           "apigateway:*"
+         ],
+         "Resource": "*"
+       },
+       {
+         "Sid": "VPCForLambda",
+         "Effect": "Allow",
+         "Action": [
+           "ec2:DescribeSecurityGroups",
+           "ec2:DescribeSubnets",
+           "ec2:DescribeVpcs",
+           "ec2:DescribeNetworkInterfaces",
+           "ec2:CreateNetworkInterface",
+           "ec2:DeleteNetworkInterface",
+           "ec2:AssignPrivateIpAddresses",
+           "ec2:UnassignPrivateIpAddresses"
+         ],
+         "Resource": "*"
+       },
+       {
+         "Sid": "SSMParameters",
+         "Effect": "Allow",
+         "Action": [
+           "ssm:GetParameter",
+           "ssm:GetParameters",
+           "ssm:PutParameter",
+           "ssm:DeleteParameter",
+           "ssm:AddTagsToResource",
+           "ssm:RemoveTagsFromResource"
+         ],
+         "Resource": "*"
+       },
+       {
+         "Sid": "SecretsManager",
+         "Effect": "Allow",
+         "Action": [
+           "secretsmanager:CreateSecret",
+           "secretsmanager:DeleteSecret",
+           "secretsmanager:DescribeSecret",
+           "secretsmanager:GetSecretValue",
+           "secretsmanager:PutSecretValue",
+           "secretsmanager:UpdateSecret",
+           "secretsmanager:TagResource",
+           "secretsmanager:UntagResource"
+         ],
+         "Resource": "*"
+       },
+       {
+         "Sid": "SQSSNS",
+         "Effect": "Allow",
+         "Action": [
+           "sqs:*",
+           "sns:*"
+         ],
+         "Resource": "*"
+       },
+       {
+         "Sid": "BillingConductor",
+         "Effect": "Allow",
+         "Action": [
+           "billingconductor:*"
+         ],
+         "Resource": "*"
+       },
+       {
+         "Sid": "ECRForLambdaContainers",
+         "Effect": "Allow",
+         "Action": [
+           "ecr:GetAuthorizationToken",
+           "ecr:BatchCheckLayerAvailability",
+           "ecr:GetDownloadUrlForLayer",
+           "ecr:BatchGetImage",
+           "ecr:PutImage",
+           "ecr:InitiateLayerUpload",
+           "ecr:UploadLayerPart",
+           "ecr:CompleteLayerUpload",
+           "ecr:CreateRepository",
+           "ecr:DeleteRepository",
+           "ecr:DescribeRepositories",
+           "ecr:SetRepositoryPolicy",
+           "ecr:DeleteRepositoryPolicy"
          ],
          "Resource": "*"
        }
      ]
    }
    ```
+
+   **For even tighter security in production:**
+   - Restrict `Resource` fields to specific ARN patterns (e.g., only resources in your account/region)
+   - Add condition keys to limit resource naming patterns
+   - Example: `"Resource": "arn:aws:lambda:eu-central-1:YOUR_ACCOUNT_ID:function/mcp-*"`
 
 7. Name the role (e.g., `GitHubActionsCDKDeployRole`)
 
