@@ -28,7 +28,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add data/
+          git add apps/web/data/
           if git diff --staged --quiet; then
             echo "changes=false" >> $GITHUB_OUTPUT
             echo "No changes detected in data files"
