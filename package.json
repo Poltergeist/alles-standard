@@ -9,7 +9,10 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
-    "preview": "turbo run preview"
+    "preview": "turbo run preview",
+    "cdk:synth": "npm run synth --workspace=cdk",
+    "cdk:deploy": "npm run deploy --workspace=cdk",
+    "cdk:diff": "npm run diff --workspace=cdk"
   },
   "devDependencies": {
     "turbo": "^2.3.3"

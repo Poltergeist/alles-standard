@@ -1,0 +1,26 @@
+{
+  "name": "cdk",
+  "version": "1.0.0",
+  "description": "AWS CDK infrastructure for alles-standard",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "cdk": "cdk",
+    "synth": "cdk synth",
+    "deploy": "cdk deploy --all --require-approval never",
+    "diff": "cdk diff",
+    "destroy": "cdk destroy --all"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-cdk-lib": "^2.175.3",
+    "constructs": "^10.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.0",
+    "aws-cdk": "^2.1104.0",
+    "typescript": "^5.9.3"
+  }
+}
