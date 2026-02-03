@@ -1,0 +1,33 @@
+{
+  "name": "members-api",
+  "version": "1.0.0",
+  "description": "Serverless API for Alles Standard member area",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "cdk": "cdk",
+    "synth": "cdk synth",
+    "deploy": "cdk deploy --all --require-approval never",
+    "diff": "cdk diff",
+    "destroy": "cdk destroy --all",
+    "local:start": "./scripts/start-local.sh",
+    "local:stop": "./scripts/stop-local.sh",
+    "local:install-deps": "./scripts/install-lambda-deps.sh",
+    "local:api": "sam local start-api --template template.yaml --env-vars .env.local --docker-network alles-standard-local",
+    "local:logs": "docker logs -f alles-standard-localstack",
+    "test:local": "echo 'Local testing setup complete. Run npm run local:start to begin.'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-cdk-lib": "^2.175.3",
+    "constructs": "^10.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.0",
+    "aws-cdk": "^2.1104.0",
+    "source-map-support": "^0.5.21",
+    "typescript": "^5.9.3"
+  }
+}
