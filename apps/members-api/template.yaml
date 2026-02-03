@@ -1,0 +1,128 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Alles Standard Members API - Local Testing
+
+Globals:
+  Function:
+    Timeout: 30
+    Runtime: nodejs20.x
+    Environment:
+      Variables:
+        USERS_TABLE: alles-standard-users
+        EVENTS_TABLE: alles-standard-events
+        DECKLISTS_TABLE: alles-standard-decklists
+        JWT_SECRET_PARAM: /alles-standard/jwt-secret
+        DISCORD_CLIENT_ID_PARAM: /alles-standard/discord-client-id
+        DISCORD_CLIENT_SECRET_PARAM: /alles-standard/discord-client-secret
+        FRONTEND_URL: http://localhost:4321
+        AWS_ENDPOINT_URL: http://localhost:4566
+
+Resources:
+  AuthCallbackFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/auth-callback/
+      Handler: index.handler
+      Events:
+        AuthCallback:
+          Type: Api
+          Properties:
+            Path: /auth/callback
+            Method: get
+
+  AuthorizerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/authorizer/
+      Handler: index.handler
+
+  DecklistsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/decklists/
+      Handler: index.handler
+      Environment:
+        Variables:
+          MOXFIELD_FETCHER_FUNCTION: MoxfieldFetcherFunction
+      Events:
+        ListDecklists:
+          Type: Api
+          Properties:
+            Path: /decklists
+            Method: get
+        GetDecklist:
+          Type: Api
+          Properties:
+            Path: /decklists/{id}
+            Method: get
+        CreateDecklist:
+          Type: Api
+          Properties:
+            Path: /decklists
+            Method: post
+            Auth:
+              Authorizer: AuthorizerFunction
+        UpdateDecklist:
+          Type: Api
+          Properties:
+            Path: /decklists/{id}
+            Method: put
+            Auth:
+              Authorizer: AuthorizerFunction
+        DeleteDecklist:
+          Type: Api
+          Properties:
+            Path: /decklists/{id}
+            Method: delete
+            Auth:
+              Authorizer: AuthorizerFunction
+
+  EventsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/events/
+      Handler: index.handler
+      Events:
+        ListEvents:
+          Type: Api
+          Properties:
+            Path: /events
+            Method: get
+        GetEvent:
+          Type: Api
+          Properties:
+            Path: /events/{id}
+            Method: get
+        CreateEvent:
+          Type: Api
+          Properties:
+            Path: /events
+            Method: post
+            Auth:
+              Authorizer: AuthorizerFunction
+        UpdateEvent:
+          Type: Api
+          Properties:
+            Path: /events/{id}
+            Method: put
+            Auth:
+              Authorizer: AuthorizerFunction
+        DeleteEvent:
+          Type: Api
+          Properties:
+            Path: /events/{id}
+            Method: delete
+            Auth:
+              Authorizer: AuthorizerFunction
+
+  MoxfieldFetcherFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/moxfield-fetcher/
+      Handler: index.handler
+      Timeout: 60
+
+Outputs:
+  ApiUrl:
+    Description: API Gateway endpoint URL
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
