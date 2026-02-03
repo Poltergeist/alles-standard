@@ -1,0 +1,90 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Authenticating - Alles Standard"
+  description="Completing authentication"
+>
+  <div class="min-h-screen flex items-center justify-center px-4">
+    <div class="card max-w-md w-full p-8 text-center">
+      <div id="loading" class="block">
+        <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-brand-gold mx-auto mb-4"></div>
+        <h1 class="text-2xl font-bold text-white mb-2">Authenticating...</h1>
+        <p class="text-gray-300">Please wait while we complete your login</p>
+      </div>
+
+      <div id="error" class="hidden">
+        <div class="text-red-500 text-5xl mb-4">⚠️</div>
+        <h1 class="text-2xl font-bold text-white mb-2">Authentication Failed</h1>
+        <p class="text-gray-300 mb-6" id="error-message"></p>
+        <a href="/members/login/" class="btn-primary inline-block">Try Again</a>
+      </div>
+
+      <div id="success" class="hidden">
+        <div class="text-green-500 text-5xl mb-4">✓</div>
+        <h1 class="text-2xl font-bold text-white mb-2">Success!</h1>
+        <p class="text-gray-300 mb-6">Redirecting to your dashboard...</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    import { exchangeOAuthCode } from '@utils/api/client';
+    import { setAuthToken, setUser } from '@utils/api/auth';
+
+    const loadingEl = document.getElementById('loading')!;
+    const errorEl = document.getElementById('error')!;
+    const errorMessageEl = document.getElementById('error-message')!;
+    const successEl = document.getElementById('success')!;
+
+    async function handleCallback() {
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get('code');
+      const error = params.get('error');
+
+      if (error) {
+        showError('Discord authorization was cancelled or failed');
+        return;
+      }
+
+      if (!code) {
+        showError('No authorization code received');
+        return;
+      }
+
+      try {
+        const response = await exchangeOAuthCode(code);
+
+        if (response.error || !response.data) {
+          showError(response.error || 'Authentication failed');
+          return;
+        }
+
+        // Save token and user data
+        setAuthToken(response.data.token);
+        setUser(response.data.user);
+
+        // Show success and redirect
+        loadingEl.classList.add('hidden');
+        successEl.classList.remove('hidden');
+
+        setTimeout(() => {
+          window.location.href = '/members/dashboard/';
+        }, 1500);
+      } catch (err) {
+        console.error('Callback error:', err);
+        showError('An unexpected error occurred');
+      }
+    }
+
+    function showError(message: string) {
+      loadingEl.classList.add('hidden');
+      errorEl.classList.remove('hidden');
+      errorMessageEl.textContent = message;
+    }
+
+    // Run on page load
+    handleCallback();
+  </script>
+</BaseLayout>

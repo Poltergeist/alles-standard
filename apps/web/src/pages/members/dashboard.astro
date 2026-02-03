@@ -1,0 +1,124 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Dashboard - Alles Standard"
+  description="Member dashboard"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Auth check and redirect -->
+    <div id="loading" class="text-center py-20">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-gold mx-auto mb-4"></div>
+      <p class="text-gray-300">Loading...</p>
+    </div>
+
+    <div id="dashboard" class="hidden">
+      <!-- Header -->
+      <div class="flex justify-between items-center mb-8">
+        <div>
+          <h1 class="text-3xl font-bold text-white mb-2">Member Dashboard</h1>
+          <p class="text-gray-300">Welcome back, <span id="username" class="text-brand-gold"></span>!</p>
+        </div>
+        <button id="logout-button" class="btn-secondary">Logout</button>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <a href="/members/submit-decklist/" class="card p-6 hover:border-brand-gold transition-colors">
+          <div class="text-4xl mb-3">📝</div>
+          <h3 class="text-xl font-bold text-white mb-2">Submit Decklist</h3>
+          <p class="text-gray-300">Share your tournament deck with the community</p>
+        </a>
+
+        <a href="/members/submit-event/" class="card p-6 hover:border-brand-gold transition-colors">
+          <div class="text-4xl mb-3">📅</div>
+          <h3 class="text-xl font-bold text-white mb-2">Create Event</h3>
+          <p class="text-gray-300">Add a new tournament to the calendar</p>
+        </a>
+      </div>
+
+      <!-- My Submissions -->
+      <div class="card p-6">
+        <h2 class="text-2xl font-bold text-white mb-4">My Submissions</h2>
+        
+        <div id="my-submissions" class="space-y-4">
+          <p class="text-gray-400">Loading your submissions...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    import { isAuthenticated, getUser, logout } from '@utils/api/auth';
+    import { getDecklists } from '@utils/api/client';
+
+    const loadingEl = document.getElementById('loading')!;
+    const dashboardEl = document.getElementById('dashboard')!;
+    const usernameEl = document.getElementById('username')!;
+    const logoutButton = document.getElementById('logout-button')!;
+    const mySubmissionsEl = document.getElementById('my-submissions')!;
+
+    async function init() {
+      if (!isAuthenticated()) {
+        window.location.href = '/members/login/';
+        return;
+      }
+
+      const user = getUser();
+      if (!user) {
+        window.location.href = '/members/login/';
+        return;
+      }
+
+      usernameEl.textContent = user.username;
+      
+      loadingEl.classList.add('hidden');
+      dashboardEl.classList.remove('hidden');
+
+      // Load user's submissions
+      await loadSubmissions(user.id);
+    }
+
+    async function loadSubmissions(userId: string) {
+      const response = await getDecklists({ userId, limit: 10 });
+
+      if (response.error || !response.data) {
+        mySubmissionsEl.innerHTML = '<p class="text-gray-400">Failed to load submissions</p>';
+        return;
+      }
+
+      const decklists = response.data.decklists || [];
+
+      if (decklists.length === 0) {
+        mySubmissionsEl.innerHTML = '<p class="text-gray-400">No submissions yet. Start by submitting a decklist!</p>';
+        return;
+      }
+
+      mySubmissionsEl.innerHTML = decklists.map((deck: any) => `
+        <div class="border border-brand-brown rounded-lg p-4">
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="text-lg font-semibold text-white">${deck.deckData?.name || 'Decklist'}</h3>
+              <p class="text-sm text-gray-400">
+                ${deck.rank ? `Rank: ${deck.rank}` : ''} 
+                ${deck.winLoss ? `• Record: ${deck.winLoss}` : ''}
+              </p>
+              <p class="text-sm text-gray-500 mt-1">
+                Submitted ${new Date(deck.createdAt).toLocaleDateString()}
+              </p>
+            </div>
+            <a href="${deck.moxfieldUrl}" target="_blank" class="text-brand-teal hover:underline text-sm">
+              View on Moxfield →
+            </a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    logoutButton.addEventListener('click', logout);
+
+    // Run on page load
+    init();
+  </script>
+</BaseLayout>
