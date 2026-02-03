@@ -1,0 +1,13 @@
+{
+  "httpMethod": "POST",
+  "path": "/decklists",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": "{\"moxfieldUrl\":\"https://www.moxfield.com/decks/yKHEKrBKXEu3uTR5uG6nnA\",\"rank\":1,\"winLoss\":\"3-1\"}",
+  "requestContext": {
+    "authorizer": {
+      "userId": "test-user-123"
+    }
+  }
+}
