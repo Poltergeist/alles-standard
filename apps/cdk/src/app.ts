@@ -7,7 +7,7 @@ const app = new cdk.App();
 
 new BillingStack(app, 'MCPServerBillingStack', {
   env: {
-    region: 'eu-central-1',
+    region: 'us-east-1', // BillingConductor only available in us-east-1
   },
   description: 'Billing group for MCP-SERVER project resources',
 });
