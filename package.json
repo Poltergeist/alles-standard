@@ -2,7 +2,7 @@
   "name": "alles-standard-monorepo",
   "version": "1.0.0",
   "private": true,
-  "packageManager": "npm@11.5.2",
+  "packageManager": "npm@11.10.1",
   "workspaces": [
     "apps/*"
   ],
