@@ -46,3 +46,13 @@ export function formatDistance(meters: number): string {
   const km = (meters / 1000).toFixed(1);
   return `${km} km`;
 }
+
+/**
+ * Format an event tag for display (e.g., "store_championship" -> "Store Championship")
+ */
+export function formatTag(tag: string): string {
+  return tag
+    .split('_')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
