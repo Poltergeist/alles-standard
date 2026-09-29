@@ -2,6 +2,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import EventCard from '@components/EventCard.astro';
 import type { EventData } from '@/types/events';
+import { formatTag, getRulesEnforcementLabel } from '@/utils/formatters';
 
 // Load events data from JSON file
 let eventsData: EventData | null = null;
@@ -17,6 +18,17 @@ try {
 
 const events = eventsData?.data?.searchEvents?.events || [];
 const totalResults = eventsData?.data?.searchEvents?.pageInfo?.totalResults || 0;
+
+// Tags present on every event carry no filtering value
+const IGNORED_TAGS = new Set(['magic:_the_gathering', 'standard']);
+const RULES_LEVEL_ORDER = ['CASUAL', 'REGULAR', 'COMPETITIVE', 'PROFESSIONAL'];
+
+const filterTags = [...new Set(events.flatMap((event) => event.tags))]
+  .filter((tag) => !IGNORED_TAGS.has(tag))
+  .sort();
+const rulesLevels = [...new Set(events.map((event) => event.rulesEnforcementLevel))].sort(
+  (a, b) => RULES_LEVEL_ORDER.indexOf(a) - RULES_LEVEL_ORDER.indexOf(b)
+);
 ---
 
 <BaseLayout 
@@ -33,7 +45,7 @@ const totalResults = eventsData?.data?.searchEvents?.pageInfo?.totalResults || 0
         These are the next events coming up for Standard format within 100km from Hamburg
       </p>
       {totalResults > 0 && (
-        <p class="text-mtg-gold font-semibold mt-2">
+        <p class="text-mtg-gold font-semibold mt-2" data-results-count data-total={totalResults}>
           {totalResults} event{totalResults !== 1 ? 's' : ''} found
         </p>
       )}
@@ -54,13 +66,55 @@ const totalResults = eventsData?.data?.searchEvents?.pageInfo?.totalResults || 0
       </div>
     )}
 
+    <!-- Filters -->
+    {events.length > 0 && (filterTags.length > 0 || rulesLevels.length > 1) && (
+      <div class="mb-8 space-y-4" data-event-filters>
+        {filterTags.length > 0 && (
+          <div>
+            <div class="text-gray-400 text-sm mb-2">Event Type</div>
+            <div class="flex flex-wrap gap-2">
+              {filterTags.map((tag) => (
+                <button type="button" class="filter-chip" data-filter-group="tag" data-value={tag} aria-pressed="false">
+                  {formatTag(tag)}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+        {rulesLevels.length > 1 && (
+          <div>
+            <div class="text-gray-400 text-sm mb-2">Rules Level</div>
+            <div class="flex flex-wrap gap-2">
+              {rulesLevels.map((level) => (
+                <button type="button" class="filter-chip" data-filter-group="level" data-value={level} aria-pressed="false">
+                  {getRulesEnforcementLabel(level)}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    )}
+
     <!-- Events List -->
     {events.length > 0 ? (
-      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-1">
-        {events.map((event) => (
-          <EventCard event={event} />
-        ))}
-      </div>
+      <>
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-1">
+          {events.map((event) => (
+            <div
+              class="min-w-0"
+              data-event
+              data-tags={event.tags.join(' ')}
+              data-level={event.rulesEnforcementLevel}
+            >
+              <EventCard event={event} />
+            </div>
+          ))}
+        </div>
+        <p class="hidden text-center py-16 text-gray-400" data-filter-empty>
+          No events match the selected filters.
+        </p>
+      </>
     ) : !errorMessage && (
       <div class="text-center py-16">
         <svg class="w-16 h-16 text-gray-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -83,3 +137,47 @@ const totalResults = eventsData?.data?.searchEvents?.pageInfo?.totalResults || 0
     </div>
   </div>
 </BaseLayout>
+
+<script>
+  const chips = document.querySelectorAll<HTMLButtonElement>('[data-filter-group]');
+  const cards = document.querySelectorAll<HTMLElement>('[data-event]');
+  const count = document.querySelector<HTMLElement>('[data-results-count]');
+  const empty = document.querySelector<HTMLElement>('[data-filter-empty]');
+
+  function selected(group: string): string[] {
+    return [...chips]
+      .filter((chip) => chip.dataset.filterGroup === group && chip.getAttribute('aria-pressed') === 'true')
+      .map((chip) => chip.dataset.value!);
+  }
+
+  function applyFilters() {
+    const tags = selected('tag');
+    const levels = selected('level');
+    let visible = 0;
+
+    cards.forEach((card) => {
+      const cardTags = card.dataset.tags!.split(' ');
+      const matchesTag = tags.length === 0 || tags.some((tag) => cardTags.includes(tag));
+      const matchesLevel = levels.length === 0 || levels.includes(card.dataset.level!);
+      const show = matchesTag && matchesLevel;
+      card.hidden = !show;
+      if (show) visible++;
+    });
+
+    const filtered = tags.length > 0 || levels.length > 0;
+    if (count) {
+      const total = Number(count.dataset.total);
+      count.textContent = filtered
+        ? `${visible} of ${total} events shown`
+        : `${total} event${total !== 1 ? 's' : ''} found`;
+    }
+    empty?.classList.toggle('hidden', visible > 0);
+  }
+
+  chips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      chip.setAttribute('aria-pressed', String(chip.getAttribute('aria-pressed') !== 'true'));
+      applyFilters();
+    });
+  });
+</script>
