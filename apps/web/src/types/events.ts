@@ -28,7 +28,7 @@ export interface Event {
   title: string;
   eventTemplateId: string;
   pairingType: string;
-  phoneNumber: string;
+  phoneNumber: string | null;
   requiredTeamSize: number;
   rulesEnforcementLevel: string;
   scheduledStartTime: string;
